@@ -22,7 +22,7 @@ function agregarformulario(numeroformulario)
         var formulario = '<label for="ldeuda">Valor de la Deuda</label>';
         formulario = formulario + '<input type="text" id="deuda" name="deuda">';
         formulario = formulario + '<label for="lcuotas">Valor de la Cuota</label>';
-        formulario = formulario + '<input type="text" id="valorcuotas" name="cuotas">';
+        formulario = formulario + '<input type="text" id="valorcuotas" name="valorcuotas">';
         formulario = formulario + '<select id="tiempo" name="tiempo">';
         formulario = formulario + '<option value="mensual">Mensual</option>';
         formulario = formulario + '<option value="trimestral">Trimestral</option>';
@@ -40,6 +40,7 @@ function agregarformulario(numeroformulario)
         formulario = formulario + '<input type="submit" value="Amortizar por Numero de Cuotas" onclick="agregarformulario(1);">';
         formulario = formulario + '<input type="submit" value="Amortizar por Valor de la Cuota" onclick="agregarformulario(2);">';
         document.getElementById("bloque_formulario").innerHTML = formulario;
+        document.getElementById("bloque_respuesta").innerHTML = "";
     }
 }
 
@@ -47,6 +48,7 @@ function amortizarporcuotas(deuda, cuotas, interes, tiempo) {
     if (deuda == "" || cuotas == "" || interes == "") {
         alert("Los campos no puede estar vacios");
     } else {
+        console.log("deuda:"+deuda+"   cuotas:"+cuotas+"  interes:"+interes)
         if(tiempo == "mensual")
         {
             interes = Math.pow((1+interes),(30/360))-1;
@@ -93,7 +95,7 @@ function amortizarporcuotas(deuda, cuotas, interes, tiempo) {
                 '<th>Amortizacion</th>'+
                 '<th>Capital Vivo</th>'+
                 '</tr>';
-                console.log(miTabla);
+                
                 for (let i = 0; i <= cuotas; i++) {
                     miTabla = miTabla + "<tr>";
                     miTabla = miTabla + "<td>" + json[i].Pago+ "</td>";
@@ -120,6 +122,7 @@ function amortizarporvalorcuota(deuda, valorcuota, interes,tiempo) {
     if (deuda == "" || valorcuota == "" || interes == "") {
         alert("Los campos no puede estar vacios");
     } else {
+        console.log("deuda:"+deuda+"   valorcuota:"+valorcuota+"  interes:"+interes)
         if(tiempo == "mensual")
         {
             interes = Math.pow((1+interes),(30/360))-1;
@@ -140,7 +143,7 @@ function amortizarporvalorcuota(deuda, valorcuota, interes,tiempo) {
             },
 
             // la URL para la petición
-            url: 'http://localhost:8080/AppCredito/servicios/amortizacioncuotas',
+            url: 'http://localhost:8080/AppCredito/servicios/amortizacionpago',
 
             // la información a enviar
             // (también es posible utilizar una cadena de datos)
@@ -165,8 +168,9 @@ function amortizarporvalorcuota(deuda, valorcuota, interes,tiempo) {
                 '<th>Amortizacion</th>'+
                 '<th>Capital Vivo</th>'+
                 '</tr>';
-                console.log(miTabla);
-                for (let i = 0; i <= cuotas; i++) {
+
+                numerocuotas = json[0].numerocuotas;
+                for (let i = 0; i <= numerocuotas; i++) {
                     miTabla = miTabla + "<tr>";
                     miTabla = miTabla + "<td>" + json[i].Pago+ "</td>";
                     miTabla = miTabla + "<td>" + json[i].Cuota+ "</td>";

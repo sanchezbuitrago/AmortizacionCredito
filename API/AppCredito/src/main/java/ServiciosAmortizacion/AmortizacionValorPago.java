@@ -54,7 +54,7 @@ public class AmortizacionValorPago {
         double valorintereses = 0;
         double valoramortizacion = 0;
         double capitalvivo = deuda;
-
+        fila.put("numerocuotas", cuotas);
         fila.put("Pago", 0);
         fila.put("Cuota", 0);
         fila.put("Intereses", valorintereses);
