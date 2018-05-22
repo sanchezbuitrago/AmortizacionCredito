@@ -35,18 +35,12 @@
 
   <section class="page-section clearfix">
     <div class="container">
+      <div class="bloque_formulario" id="bloque_formulario">
+  
+        <input type="submit" value="Amortizar por Numero de Cuotas" onclick="agregarformulario(1);">
+        <input type="submit" value="Amortizar por Valor de la Cuota" onclick="agregarformulario(2);">
 
-      <label for="ldeuda">Valor de la Deuda</label>
-      <input type="text" id="deuda" name="deuda">
-
-      <label for="lcuotas">Numero de Cuotas</label>
-      <input type="text" id="cuotas" name="cuotas">
-
-      <label for="interes">Interes Mensual</label>
-      <input type="text" id="interes" name="interes">
-
-      <input type="submit" onclick="amortizardeuda(deuda.value,cuotas.value,interes.value);">
-
+      </div>
     </div>
   </section>
 
